@@ -26,7 +26,7 @@ func (query FSetQueryBuilder) toCmd() cmd {
 	}
 
 	for _, field := range query.fields {
-		args = append(args, field.Name, floatString(field.Value))
+		args = append(args, field.Name, field.Value)
 	}
 	return newCmd("FSET", args...)
 }
@@ -38,7 +38,7 @@ func (query FSetQueryBuilder) Do(ctx context.Context) error {
 }
 
 // Field sets the object field
-func (query FSetQueryBuilder) Field(name string, value float64) FSetQueryBuilder {
+func (query FSetQueryBuilder) Field(name string, value string) FSetQueryBuilder {
 	query.fields = append(query.fields, field{name, value})
 	return query
 }

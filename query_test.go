@@ -156,7 +156,7 @@ func TestKeys(t *testing.T) {
 		{
 			Cmd: keys.Set("agent", "49").
 				PointZ(0, 0, -20).
-				Field("age", 55).
+				Field("age", "55").
 				IfNotExists().
 				Expiration(60 * 60 * 24 * 365).toCmd(),
 			Expected: "SET agent 49 NX EX 31536000 FIELD age 55 POINT 0 0 -20",
@@ -164,37 +164,37 @@ func TestKeys(t *testing.T) {
 		{
 			Cmd: keys.Set("agent", "47").
 				PointZ(0, 0, -20).
-				Field("age", 55).
-				IfExists().Field("foo", 10).toCmd(),
+				Field("age", "55").
+				IfExists().Field("foo", "10").toCmd(),
 			Expected: "SET agent 47 XX FIELD age 55 FIELD foo 10 POINT 0 0 -20",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("cash", 100500).
+				Field("cash", "100500").
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX cash 100500",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("id", 123456789012345680).
+				Field("id", "123456789012345680").
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX id 123456789012345680",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("id", -123456789012345680).
+				Field("id", "-123456789012345680").
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX id -123456789012345680",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("small", 0.00000000012345678901234568).
+				Field("small", "0.00000000012345678901234568").
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX small 0.00000000012345678901234568",
 		},
 		{
 			Cmd: keys.FSet("agent", "47").
-				Field("small", -0.00000000012345678901234568).
+				Field("small", "-0.00000000012345678901234568").
 				IfExists().toCmd(),
 			Expected: "FSET agent 47 XX small -0.00000000012345678901234568",
 		},

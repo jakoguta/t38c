@@ -10,7 +10,7 @@ import (
 
 type field struct {
 	Name  string
-	Value float64
+	Value string
 }
 
 // KeyStats is a tile38 key stats.
